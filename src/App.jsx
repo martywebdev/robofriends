@@ -29,13 +29,9 @@ const App = () => {
     });
   }, [])
 
-  useEffect(() => {
-
-    if (search) {
-      const filtered =  robots.filter(robot => robot.name.toLowerCase().includes(search.toLowerCase())
-       || robot.email.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
-      setFilteredRobots(filtered)
-    }
+  useEffect(() => {  
+      const filtered =  robots.filter(robot => robot.name.toLowerCase().includes(search.toLowerCase()) || robot.email.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
+      setFilteredRobots(filtered)    
   },[search])
 
   return (

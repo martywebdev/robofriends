@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import './App.css'
-import { robots } from './robots'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchRobots, setSearch } from './store/robots/robotsSlice'
+import { fetchRobots } from './store/robots/robotsSlice'
 import CardList from './components/CardList'
 import SearchBox from './components/SearchBox'
 
@@ -38,20 +37,16 @@ const App = () => {
 
   ////////////////////REDUX////////////
   const dispatch = useDispatch();
-  const { filteredRobots, search, status, error } = useSelector((state) => state.robots);
+  const { filteredRobots, status, error } = useSelector((state) => state.robots);
 
   useEffect(() => {
     dispatch(fetchRobots());
-  }, [dispatch]);
-
-  const handleSearch = (value) => {
-    dispatch(setSearch(value));
-  };
+  }, []);
 
   return (
     <div className='tc'>
       <h1>RoboFriends</h1>
-      <SearchBox setSearch={handleSearch}/>
+      <SearchBox/>
       {status === 'loading' && <p>Loading...</p>}
       {status === 'failed' && <p>{error}</p>}
       <CardList robots={filteredRobots} />

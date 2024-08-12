@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { setSearch as setSearchInStore } from '../store/robots/robotsSlice'
 import { useDispatch } from 'react-redux'
 
-const SearchBox = ({}) => {
+const SearchBox = () => {
   const dispatch = useDispatch()
   const [search, setSearch] = useState('')
 

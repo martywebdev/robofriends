@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { RobotsState } from '../../lib/definitions';
 
-const initialState = {
+const initialState: RobotsState= {
   robots: [],
   filteredRobots: [],
   search: '',
@@ -28,7 +29,7 @@ const robotsSlice = createSlice({
   name: 'robots',
   initialState,
   reducers: {
-    setSearch(state, action) {
+    setSearch(state: RobotsState, action) {
       state.search = action.payload
       state.filteredRobots = state.robots.filter(robot => {
         return (
@@ -51,7 +52,7 @@ const robotsSlice = createSlice({
       })
       .addCase(fetchRobots.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.error.message;
+        state.error = action.error.message ?? null;
       });
   },
 });

@@ -6,11 +6,11 @@ const SearchBox = () => {
   const dispatch = useDispatch()
   const [search, setSearch] = useState('')
 
-  const handleOnChange = e => {
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value)
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     dispatch(setSearchInStore(search))
   }
@@ -19,7 +19,12 @@ const SearchBox = () => {
       <form onSubmit={handleSubmit}>
         <input type="search" className="pa3 ba b--green bg-lightest-blue" placeholder='search robots' 
         onChange={handleOnChange}
-        onInput={e => e.target.value === '' && dispatch(setSearchInStore(e.target.value))}
+        onInput={(e: React.FormEvent<HTMLInputElement>) => {
+          const target = e.currentTarget as HTMLInputElement;
+          if (target.value === '') {
+            dispatch(setSearchInStore(target.value));
+          }
+        }}
         />
       </form>
     </div>
